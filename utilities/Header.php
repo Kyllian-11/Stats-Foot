@@ -36,7 +36,7 @@ $current_url = $_SERVER['SCRIPT_NAME']; ?>
                         <a class="nav-link text-dark" href="/Stats.php">Stats</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="/admin/dashboard.php">Connexion</a>
+                        <a class="nav-link text-dark" href="/admin/Connexion.php">Connexion</a>
                     </li>
                 </ul>
             </div>

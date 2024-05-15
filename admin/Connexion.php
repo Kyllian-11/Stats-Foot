@@ -1,7 +1,9 @@
 <?php
-require dirname(__DIR__). ('/utilities/Header.php');
-require dirname(__DIR__) . ('/function/Database.fn.php');
 session_start(); // Démarrez la session
+
+require dirname(__DIR__). '/utilities/Header.php';
+require dirname(__DIR__) . '/config/Config.php';
+require dirname(__DIR__) . '/function/Database.fn.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Vérifiez si le formulaire a été soumis
@@ -10,39 +12,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
         $mdp = htmlspecialchars($_POST['mdp'], ENT_QUOTES, 'UTF-8');
 
-        // Inclure le fichier de connexion à la base de données
-        include 'config/Config.php';
-        include 'function/Database.fn.php';
-
         // Récupérer l'administrateur depuis la base de données
         $pdo = getPDOlink($config);
-        $stmt = $pdo->prepare("SELECT * FROM user WHERE email = :email");
-        $stmt->execute(['email' => $email]);
+        $stmt = $pdo->prepare("SELECT * FROM user WHERE mail = :mail");
+        $stmt->execute(['mail' => $email]);
         $admin = $stmt->fetch();
 
-        if ($admin && sha1($mdp) === $admin['mdp']) {
+        if ($admin && password_verify($mdp, $admin['mdp'])) {
             // Authentification réussie, définissez une variable de session pour l'admin
             $_SESSION['admin'] = $admin;
 
             // Rediriger vers le tableau de bord
-            header("Location: /dashboard.php");
+            header("Location: dashboard.php");
             exit();
         } else {
-            $error_message = "Nom d'utilisateur ou mot de passe incorrect.";
+            $error_message = "E-mail ou mot de passe incorrect.";
         }
     } else {
-        $error_message = "Veuillez entrer votre nom d'utilisateur et votre mot de passe.";
+        $error_message = "Veuillez entrer votre E-mail et votre mot de passe.";
     }
 }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page de connexion</title>
-</head>
 
 <body>
     <h2>Connexion Administrateur</h2>
@@ -66,8 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </form>
-    <a href="index.php">Accueil</a>
 </body>
-<?php require dirname(__DIR__) . ('/utilities/footer.php'); ?>
+<?php require dirname(__DIR__) . '/utilities/footer.php'; ?>
 
 </html>
