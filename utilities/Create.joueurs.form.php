@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Rediriger vers une autre page
     header("Location: /admin/dashboard.php");
-    exit(); // Assurez-vous de terminer le script après la redirection
+    exit();
 }
 ?>
 <form method="POST" class="d-flex justify-content-center mt-5 pt-3 mb-5">
@@ -59,7 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <?php endforeach; ?>
                 </select>
             </div>
-            <!-- À l'intérieur de votre formulaire -->
             <div class="form-group">
                 <label for="competitions">Compétitions du joueur (sélectionnez deux au maximum)</label><br>
                 <?php foreach ($competitions as $competition): ?>
