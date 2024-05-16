@@ -19,6 +19,7 @@ $joueurs = findAllJoueur($db);
 </head>
 
 <body>
+    <?php if(isconnected()){ ?>
     <h1 class='text-center'>DASHBOARD</h1>
     <div class="d-flex justify-content-evenly">
         <a href="/crud/Create.php?q=joueurs" class="btn btn-success">Ajouter un joueur</a>
@@ -54,6 +55,9 @@ $joueurs = findAllJoueur($db);
             <?php } ?>
         </tbody>
     </table>
+    <?php } else { ?>
+    <p>Vous n'avez pas l'autorisation pour acceder a cette page </p>
+    <?php } ?>
 </body>
 
 </html>

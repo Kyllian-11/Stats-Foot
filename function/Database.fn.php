@@ -22,3 +22,28 @@ function getPDOlink($config) {
     exit('BDD Erreur de connexion : ' . $e->getMessage());
   }
 }
+
+function hashExistingData($db) {
+  try {
+      // Récupérer les enregistrements à partir de la base de données
+      $query = $db->query("SELECT * FROM user");
+      $users = $query->fetchAll();
+
+      // Parcourir les utilisateurs et hasher les mots de passe et les adresses e-mail
+      foreach ($users as $user) {
+          $hashedPassword = password_hash($user['mdp'], PASSWORD_DEFAULT);
+
+          // Mettre à jour les enregistrements dans la base de données avec les valeurs hachées
+          $stmt = $db->prepare("UPDATE user SET mdp = :mdp WHERE id = :id");
+          $stmt->execute(['mdp' => $hashedPassword,'id' => $user['id']]);
+      }
+
+      echo "Les mots de passe ont été hachés avec succès.";
+  } catch (PDOException $e) {
+      echo "Erreur lors du hachage des données existantes : " . $e->getMessage();
+  }
+}
+
+// Appel de la fonction pour hasher les données existantes
+// $db = getPDOlink($config);
+// hashExistingData($db);

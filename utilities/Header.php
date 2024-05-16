@@ -1,4 +1,6 @@
 <?php
+
+require dirname(__DIR__) . '/function/User.fn.php';
 // Definir les domain
 $domain = '/';
 $index_page = $domain;
@@ -35,9 +37,20 @@ $current_url = $_SERVER['SCRIPT_NAME']; ?>
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="/Stats.php">Stats</a>
                     </li>
+                    <?php if(isconnected()){ ?>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/admin/Deconnexion.php">Déconnexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/admin/dashboard.php">Dashboard</a>
+                    </li>
+                    <?php }
+                    else { ?>
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="/admin/Connexion.php">Connexion</a>
                     </li>
+                    <?php } ?>
+
                 </ul>
             </div>
         </div>
