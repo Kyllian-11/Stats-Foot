@@ -22,17 +22,15 @@ if ($_GET['q'] == 'joueurs') {
 
         // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Traitez les données du formulaire ici
+
 
     // Récupérer les ID des compétitions sélectionnées
     $competitions = $_POST['competitions'];
 
     // S'assurer qu'il n'y a pas plus de deux compétitions sélectionnées
     if (count($competitions) > 2) {
-        // Gérer l'erreur : afficher un message à l'utilisateur, rediriger, etc.
-        // Par exemple :
         echo "Veuillez sélectionner au maximum deux compétitions.";
-        exit(); // Arrêter l'exécution du script
+        exit(); 
     }
 
     // Requête pour ajouter un nouveau joueur
@@ -42,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupérer l'ID du joueur nouvellement ajouté
     $joueurId = $db->lastInsertId();
 
-    // Insérer les associations joueur-compétition dans la table competition_joueurs
+    // Insérer dans competitions_joueurs
     foreach ($competitions as $competitionId) {
         $sql2 = "INSERT INTO `competition_joueurs`(`joueursID`, `competitionsID`) VALUES ('$joueurId','$competitionId')";
         $db->query($sql2);

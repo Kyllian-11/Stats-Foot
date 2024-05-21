@@ -14,7 +14,6 @@ function getPDOlink($config) {
     $db->exec("SET NAMES utf8");
 
     // On definit le mode de fetch par defaut :
-    // $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
     return $db;
