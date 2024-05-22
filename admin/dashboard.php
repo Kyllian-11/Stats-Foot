@@ -56,7 +56,7 @@ $joueurs = findAllJoueur($db);
         </tbody>
     </table>
     <?php } else { ?>
-    <p>Vous n'avez pas l'autorisation pour acceder a cette page </p>
+    <p class="fs-1 text-center my-5">Vous n'avez pas l'autorisation pour acceder a cette page </p>
     <?php } ?>
 </body>
 

@@ -60,14 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="competitions">Compétitions du joueur (sélectionnez deux au maximum)</label><br>
-                <?php foreach ($competitions as $competition): ?>
-                <input type="checkbox" class="competition-checkbox" name="competitions[]"
-                    value="<?= $competition['id'] ?>">
-                <label><?= $competition['nom'] ?></label><br>
-                <?php endforeach; ?>
-            </div>
 
             <div class="div">
                 <label for="pathimg"> Chemin de l'image </label>

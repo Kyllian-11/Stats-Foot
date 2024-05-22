@@ -28,7 +28,6 @@ function findJoueurById($db, $id) {
   $requete = $db->query($sql);
   $joueur = $requete->fetch();
   
-  // Diviser la chaîne concaténée en un tableau
   $joueur['pathimg_competitions'] = explode(',', $joueur['pathimg_competitions']);
   
   return $joueur;

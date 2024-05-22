@@ -23,30 +23,12 @@ if (isset($_POST) && !empty($_POST)) {
 
     $sql = "UPDATE `joueurs` SET `nom` = '$nom',`prenom` = '$prenom', `age` = '$age', `pathimg` = '$pathimg', `valeur` = '$valeur', `but` = '$but', `passe` = '$passe', `nbre_match` = '$match', `equipeID` = '$equipe', `nationID` = '$nation' WHERE id = $id";
 
-$db->query($sql);
-}
+    $db->query($sql);
 
-// Vérifier si l'ID du joueur et les ID des compétitions sont définis dans la requête POST
-if (isset($_POST['joueur_id']) && isset($_POST['competition1_id']) && isset($_POST['competition2_id'])) {
-    // Récupérer les ID du joueur et des compétitions à partir de la requête POST
-    $joueurId = $_POST['joueur_id'];
-    $competition1Id = $_POST['competition1_id'];
-    $competition2Id = $_POST['competition2_id'];
-
-    // Préparation de la requête pour mettre à jour les ID des compétitions du joueur
-    $sql2 = "UPDATE `competition_joueurs` SET `competitionsID` = CASE 
-                WHEN joueursID = ? THEN ? 
-                WHEN joueursID = ? THEN ? 
-            END
-            WHERE joueursID IN (?, ?)";
-    
-    $stmt = $db->prepare($sql2);
-    $stmt->execute([$joueurId, $competition1Id, $joueurId, $competition2Id, $joueurId, $joueurId]);
-
-    // Redirection vers une autre page
     header("Location: /admin/dashboard.php");
     exit();
 }
+
 
 
 

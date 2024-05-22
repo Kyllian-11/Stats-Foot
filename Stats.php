@@ -20,7 +20,7 @@ if (isset($_POST['selection'])) {
 
 
 ?>
-<!-- Formulaire de tri -->
+<!-- Formulaire de tri par stats -->
 <div class="d-flex justify-content-center">
     <div class="p-3">
         <div class="col-md-3 col-10 w-100">
