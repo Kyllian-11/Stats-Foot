@@ -5,5 +5,5 @@
     'dbname' => 'projet',
     'dbport' => '3306',
     'dbuser' => 'root',
-    'dbpass' => ''
+    'dbpass' => 'Kyllian1311'
   );
